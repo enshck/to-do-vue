@@ -1,29 +1,34 @@
-import { createRouter, createWebHistory } from 'vue-router';
+import Vue from 'vue';
+import VueRouter from 'vue-router';
 
 import ToDoPage from '@/views/Home/ToDo';
+import AuthRootPage from '@/views/Auth/index.vue';
 import LoginPage from '@/views/Auth/Login';
 import RegistrationPage from '@/views/Auth/Registration';
+
+Vue.use(VueRouter);
 
 const routes = [
   {
     path: '/',
     name: 'home',
     redirect: '/to-do',
-    children: [
-      {
-        path: 'to-do',
-        name: 'todo',
-        component: ToDoPage,
-        meta: {
-          isPrivate: true,
-        },
-      },
-    ],
+    meta: {
+      isPrivate: true,
+    },
+  },
+  {
+    path: '/to-do',
+    component: ToDoPage,
+    meta: {
+      isPrivate: true,
+    },
   },
   {
     path: '/auth',
     name: 'auth',
     redirect: '/auth/login',
+    component: AuthRootPage,
     children: [
       {
         path: 'login',
@@ -43,27 +48,31 @@ const routes = [
       },
     ],
   },
+  {
+    path: '*',
+    redirect: '/',
+  },
 ];
 
-const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+const router = new VueRouter({
   routes,
+  mode: 'history',
 });
 
-router.beforeEach((to) => {
+router.beforeEach((to, from, next) => {
   const isAuthorized = false;
 
-  if (to.meta.isPrivate && !isAuthorized) {
-    return {
-      name: 'auth',
-    };
+  if (to?.meta?.isPrivate && !isAuthorized) {
+    next('/auth');
+    return;
   }
 
-  if (!to.meta.isPrivate && isAuthorized) {
-    return {
-      name: 'home',
-    };
+  if (!to?.meta?.isPrivate && isAuthorized) {
+    next('/');
+    return;
   }
+
+  next();
 });
 
 export default router;
