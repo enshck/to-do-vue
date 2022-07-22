@@ -7,17 +7,18 @@ interface IProps {
     email: string;
     password: string;
   };
+  onSubmit: () => void;
 }
 
 const props = defineProps<IProps>();
-const { formData } = toRefs(props);
+const { formData, onSubmit } = toRefs(props);
 </script>
 
 <template>
   <div class="mainContainer">
-    <a-input v-model:value="formData.email" type="email" placeholder="Email" />
-    <a-input v-model:value="formData.password" type="password" placeholder="Password" />
-    <a-button type="primary">Submit</a-button>
+    <a-input v-model="formData.email" type="email" placeholder="Email" />
+    <a-input v-model="formData.password" type="password" placeholder="Password" />
+    <a-button type="primary" @click="onSubmit">Submit</a-button>
   </div>
 </template>
 

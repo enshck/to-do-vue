@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { reactive } from 'vue';
+
 import LoginForm from '@/components/LoginForm';
+import store from '@/store';
+import router from '@/router';
 
 export interface IFormData {
   email: string;
@@ -11,14 +14,21 @@ const formData = reactive<IFormData>({
   email: '',
   password: '',
 });
+
+const onSubmit = () => {
+  store.commit('setAuthData', {
+    token: '',
+    email: '',
+  });
+  router.push({
+    name: 'home',
+  });
+};
 </script>
 
 <template>
-  <div>
-    {{ formData }}
-    <div class="mainContainer">
-      <login-form v-model:formData="formData" />
-    </div>
+  <div class="mainContainer">
+    <login-form :formData="formData" :onSubmit="onSubmit" />
   </div>
 </template>
 

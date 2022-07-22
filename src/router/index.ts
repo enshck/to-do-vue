@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import store from '@/store';
 
 import ToDoPage from '@/views/Home/ToDo';
 import AuthRootPage from '@/views/Auth/index.vue';
@@ -19,6 +20,7 @@ const routes = [
   },
   {
     path: '/to-do',
+    name: 'todo',
     component: ToDoPage,
     meta: {
       isPrivate: true,
@@ -60,7 +62,7 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  const isAuthorized = false;
+  const isAuthorized = !!store.state.authData;
 
   if (to?.meta?.isPrivate && !isAuthorized) {
     next('/auth');
