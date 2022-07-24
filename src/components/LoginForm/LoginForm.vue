@@ -1,24 +1,22 @@
 <script setup lang="ts">
-import { defineProps, toRefs } from 'vue';
-// import { IFormData } from '@/views/Auth/Registration/Registration.vue';
+import { defineProps, toRef } from 'vue';
+import type { IFormData } from '@/views/Auth/RegistrationPage/RegistrationPage.vue';
 
 interface IProps {
-  formData: {
-    email: string;
-    password: string;
-  };
+  formData: IFormData;
   onSubmit: () => void;
+  isInvalidForm: boolean;
 }
 
 const props = defineProps<IProps>();
-const { formData, onSubmit } = toRefs(props);
+const formData = toRef(props, 'formData');
 </script>
 
 <template>
   <div class="mainContainer">
     <a-input v-model="formData.email" type="email" placeholder="Email" />
     <a-input v-model="formData.password" type="password" placeholder="Password" />
-    <a-button type="primary" @click="onSubmit">Submit</a-button>
+    <a-button type="primary" @click="props.onSubmit" :disabled="props.isInvalidForm">Submit</a-button>
   </div>
 </template>
 

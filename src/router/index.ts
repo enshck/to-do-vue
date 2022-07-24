@@ -5,7 +5,7 @@ import store from '@/store';
 import ToDoPage from '@/views/Home/ToDo';
 import AuthRootPage from '@/views/Auth/index.vue';
 import LoginPage from '@/views/Auth/Login';
-import RegistrationPage from '@/views/Auth/Registration';
+import RegistrationPage from '@/views/Auth/RegistrationPage';
 
 Vue.use(VueRouter);
 
