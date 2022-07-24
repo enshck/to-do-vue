@@ -16,7 +16,7 @@ const formData = reactive<IFormData>({
 });
 const isInvalidForm = computed<boolean>(() => !loginValidation(formData));
 
-const onSubmit = async () => authSubmit(formData, true);
+const onSubmit = async () => authSubmit(formData, false);
 </script>
 
 <template>
