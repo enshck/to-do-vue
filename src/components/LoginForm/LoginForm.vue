@@ -13,7 +13,7 @@ const formData = toRef(props, 'formData');
 </script>
 
 <template>
-  <div class="mainContainer">
+  <div :class="$style.mainContainer">
     <a-input v-model="formData.email" type="email" placeholder="Email" />
     <a-input v-model="formData.password" type="password" placeholder="Password" />
     <a-button type="primary" @click="props.onSubmit" :disabled="props.isInvalidForm">Submit</a-button>
@@ -21,6 +21,17 @@ const formData = toRef(props, 'formData');
 </template>
 
 <style scoped>
+input {
+  margin-top: 10px;
+  width: 100%;
+}
+
+button {
+  margin-top: 20px;
+}
+</style>
+
+<style module>
 .mainContainer {
   width: 100%;
   max-width: 300px;
@@ -29,14 +40,5 @@ const formData = toRef(props, 'formData');
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
   padding: 15px;
   flex: 0;
-}
-
-input {
-  margin-top: 10px;
-  width: 100%;
-}
-
-button {
-  margin-top: 20px;
 }
 </style>

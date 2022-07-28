@@ -20,12 +20,12 @@ const onSubmit = async () => authSubmit(formData, true);
 </script>
 
 <template>
-  <div class="mainContainer">
+  <div :class="$style.mainContainer">
     <login-form :formData="formData" :onSubmit="onSubmit" :isInvalidForm="isInvalidForm" />
   </div>
 </template>
 
-<style scoped>
+<style module>
 .mainContainer {
   width: 100%;
   height: 100%;

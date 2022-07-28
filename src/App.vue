@@ -7,6 +7,7 @@ import { get, clear } from '@/utils/localStorage';
 import router from '@/router';
 import store from '@/store';
 import axios from '@/config/axios';
+import GlobalHeader from '@/components/GlobalHeader';
 
 const isComponentMounted = ref<boolean>(false);
 
@@ -45,5 +46,14 @@ onMounted(() => {
 </script>
 
 <template>
-  <div id="app" v-if="isComponentMounted"><router-view /></div>
+  <div :class="$style.mainContainer" v-if="isComponentMounted"><global-header /><router-view /></div>
 </template>
+
+<style module>
+.mainContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+</style>

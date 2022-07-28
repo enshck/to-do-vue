@@ -1,7 +1,7 @@
-<template><div>ToDo page</div></template>
+<template><div :class="$style.mainContainer">TODO</div></template>
 
-<script lang="ts">
-export default {
-  name: 'ToDo',
-};
-</script>
+<style module>
+.mainContainer {
+  width: 100%;
+}
+</style>
