@@ -9,7 +9,7 @@ interface IData {
 }
 
 export const authSubmit = async (formData: IData, isSignUp: boolean) => {
-  const authData = (isSignUp ? await signUp(formData) : await login(formData)).data;
+  const authData = (isSignUp ? await signUp(formData) : await login(formData))?.data;
 
   set('authData', JSON.stringify(authData));
 
